@@ -55,20 +55,15 @@ class Auth_SASL_Common
     function _HMAC_MD5($key, $data)
     {
         if (strlen($key) > 64) {
-            $key = pack('H32', md5($pass));
+            $key = pack('H32', md5($key));
         }
 
         if (strlen($key) < 64) {
             $key = str_pad($key, 64, chr(0));
         }
 
-        $k_ipad = '';
-        $k_opad = '';
-        for ($i=0; $i<64; $i++) {
-            $byte    = ord($key{$i});
-            $k_ipad .= chr($byte ^ 0x36);
-            $k_opad .= chr($byte ^ 0x5C);
-        }
+        $k_ipad = (substr($key, 0, 64) ^ str_repeat(chr(0x36), 64));
+        $k_opad = (substr($key, 0, 64) ^ str_repeat(chr(0x5C), 64));
 
         $inner  = pack('H32', md5($k_ipad . $data));
         $digest = md5($k_opad . $inner);
