@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE package SYSTEM "../package.dtd">
+
+<package>
+
+  <name>Auth_SASL</name>
+  <summary>Abstraction of various SASL mechanism responses</summary>
+  <description>
+Provides code to generate responses to common SASL mechanisms, including:
+o Digest-MD5
+o CramMD5
+o Plain
+o Anonymous
+o Login (Pseudo mechanism)
+  </description>
+
+  <maintainers>
+    <maintainer>
+      <user>richard</user>
+      <name>Richard Heyes</name>
+      <email>richard@php.net</email>
+      <role>lead</role>
+    </maintainer>
+  </maintainers>
+
+  <release>
+    <license>BSD</license>
+    <version>1.0.0</version>
+    <date>2002-05-26</date>
+    <state>stable</state>
+    <notes>
+Initial release
+    </notes>
+    <filelist>
+      <dir name="/" baseinstalldir="Auth">
+	  	<file role="php" name="SASL.php" />
+		<dir name="SASL">
+			<file role="php" name="Anonymous.php" />
+			<file role="php" name="Common.php" />
+			<file role="php" name="CramMD5.php" />
+			<file role="php" name="DigestMD5.php" />
+			<file role="php" name="Login.php" />
+			<file role="php" name="Plain.php" />
+		</dir>
+      </dir>
+    </filelist>
+  </release>
+
+</package>
