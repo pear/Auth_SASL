@@ -47,15 +47,137 @@ require_once('Auth/SASL/Common.php');
 
 class Auth_SASL_DigestMD5 extends Auth_SASL_Common
 {
-	function getResponse($challenge)
+	/**
+    * Provides the (main) client response for DIGEST-MD5
+	* requires a few extra parameters than the other
+	* mechanisms, which are unavoidable.
+	* 
+	* @param  string $user      Username
+	* @param  string $pass      Password
+	* @param  string $challenge The digest challenge sent by the server
+	* @param  string $hostname  The hostname of the machine you're connecting to
+	* @param  string $service   The servicename (eg. imap, pop, acap etc)
+	* @return string            The digest response (NOT base64 encoded)
+	* @access public
+    */
+	function getResponse($user, $pass, $challenge, $hostname, $service)
 	{
 		$challenge = $this->_parseChallenge($challenge);
+
+		if (!empty($challenge)) {
+			$cnonce         = $this->_getCnonce();
+			$digest_uri     = sprintf('%s/%s', $service, $hostname);
+			$response_value = $this->_getResponseValue($user, $pass, $challenge['realm'], $challenge['nonce'], $cnonce, $digest_uri);
+
+			return sprintf('username="%s",realm="%s",nonce="%s",cnonce="%s",nc="00000001",qop=auth,digest-uri="%s",response=%s,%d', $user, $challenge['realm'], $challenge['nonce'], $cnonce, $digest_uri, $response_value, $challenge['maxbuf']);
+		} else {
+			return PEAR::raiseError('Invalid digest challenge');
+		}
 	}
 	
+	/**
+    * Parses and verifies the digest challenge*
+	*
+	* @param  string $challenge The digest challenge
+	* @return array             The parsed challenge as an assoc
+	*                           array in the form "directive => value".
+	* @access private
+    */
 	function _parseChallenge($challenge)
 	{
-		while (preg_match('/^([a-z]+)=(".+"|[^,]+)/Ui', $challenge, $matches)) {
-			pdd($matches);
+		$tokens = array();
+		while (preg_match('/^([a-z-]+)=("[^"]+(?<!\\\)"|[^,]+)/i', $challenge, $matches)) {
+
+			// Ignore these as per rfc2831
+			if ($matches[1] == 'opaque' OR $matches[1] == 'domain') {
+				$challenge = substr($challenge, strlen($matches[0]) + 1);
+				continue;
+			}
+
+			// Allowed multiple "realm" and "auth-param"
+			if (!empty($tokens[$matches[1]]) AND ($matches[1] == 'realm' OR $matches[1] == 'auth-param')) {
+				if (is_array($tokens[$matches[1]])) {
+					$tokens[$matches[1]][] = preg_replace('/^"(.*)"$/', '\\1', $matches[2]);
+				} else {
+					$tokens[$matches[1]] = array($tokens[$matches[1]], preg_replace('/^"(.*)"$/', '\\1', $matches[2]));
+				}
+
+			// Any other multiple instance = failure
+			} elseif (!empty($tokens[$matches[1]])) {
+				$tokens = array();
+				break;
+
+			} else {
+				$tokens[$matches[1]] = preg_replace('/^"(.*)"$/', '\\1', $matches[2]);
+			}
+
+			// Remove the just parsed directive from the challenge
+			$challenge = substr($challenge, strlen($matches[0]) + 1);
+		}
+
+		/**
+        * Defaults and required directives
+        */
+		// Realm
+		if (empty($tokens['realm'])) {
+			$uname = posix_uname();
+			$tokens['realm'] = $uname['nodename'];
+		}
+		
+		// Maxbuf
+		if (empty($tokens['maxbuf'])) {
+			$tokens['maxbuf'] = 65536;
+		}
+		
+		// Required: nonce, algorithm
+		if (empty($tokens['nonce']) OR empty($tokens['algorithm'])) {
+			return array();
+		}
+		
+		return $tokens;
+	}
+
+	/**
+    * Creates the response= part of the digest response
+	*
+	* @param  string $user       Username
+	* @param  string $pass       Password
+	* @param  string $realm      Realm as provided by the server
+	* @param  string $nonce      Nonce as provided by the server
+	* @param  string $cnonce     Client nonce
+	* @param  string $digest_uri The digest-uri= value part of the response
+	* @return string             The response= part of the digest response
+	* @access private
+    */	
+	function _getResponseValue($user, $pass, $realm, $nonce, $cnonce, $digest_uri)
+	{
+		$A1 = sprintf('%s:%s:%s', pack('H32', md5(sprintf('%s:%s:%s', $user, $realm, $pass))), $nonce, $cnonce);
+		$A2 = 'AUTHENTICATE:' . $digest_uri;
+		return md5(sprintf('%s:%s:00000001:%s:auth:%s', md5($A1), $nonce, $cnonce, md5($A2)));
+	}
+
+	/**
+    * Creates the client nonce for the response
+	*
+	* @return string  The cnonce value
+	* @access private
+    */
+	function _getCnonce()
+	{
+		if (file_exists('/dev/urandom')) {
+			return base64_encode(fread(fopen('/dev/urandom', 'r'), 32));
+
+		} elseif (file_exists('/dev/random')) {
+			return base64_encode(fread(fopen('/dev/random', 'r'), 32));
+
+		} else {
+			$str = '';
+			mt_srand((double)microtime()*10000000);
+			for ($i=0; $i<32; $i++) {
+				$str .= chr(mt_rand(0, 255));
+			}
+			
+			return base64_encode($str);
 		}
 	}
 }
