@@ -47,12 +47,16 @@ require_once('Auth/SASL/Common.php');
 
 class Auth_SASL_Plain extends Auth_SASL_Common
 {
-	/**
-    * 
+    /**
+    * Returns PLAIN response
+    *
+    * @param  string $user Username
+    * @param  string $pass Password
+    * @return string       PLAIN Response
     */
-	function getResponse($user, $pass)
-	{
-		return chr(0) . $user . chr(0) . $pass;
-	}
+    function getResponse($user, $pass)
+    {
+        return chr(0) . $user . chr(0) . $pass;
+    }
 }
 ?>

@@ -47,52 +47,52 @@ require_once('PEAR.php');
 
 class Auth_SASL
 {
-	/**
+    /**
     * Factory class. Returns an object of the request
-	* type.
-	*
-	* @param string $type One of: Anonymous
-	*                             Plain
-	*                             CramMD5
-	*                             DigestMD5
-	*                     Types are not case sensitive
+    * type.
+    *
+    * @param string $type One of: Anonymous
+    *                             Plain
+    *                             CramMD5
+    *                             DigestMD5
+    *                     Types are not case sensitive
     */
-	function &factory($type)
-	{
-		switch (strtolower($type)) {
-			case 'anonymous':
-				$filename  = 'Auth/SASL/Anonymous.php';
-				$classname = 'Auth_SASL_Anonymous';
-				break;
+    function &factory($type)
+    {
+        switch (strtolower($type)) {
+            case 'anonymous':
+                $filename  = 'Auth/SASL/Anonymous.php';
+                $classname = 'Auth_SASL_Anonymous';
+                break;
 
-			case 'login':
-				$filename  = 'Auth/SASL/Login.php';
-				$classname = 'Auth_SASL_Login';
-				break;
+            case 'login':
+                $filename  = 'Auth/SASL/Login.php';
+                $classname = 'Auth_SASL_Login';
+                break;
 
-			case 'plain':
-				$filename  = 'Auth/SASL/Plain.php';
-				$classname = 'Auth_SASL_Plain';
-				break;
+            case 'plain':
+                $filename  = 'Auth/SASL/Plain.php';
+                $classname = 'Auth_SASL_Plain';
+                break;
 
-			case 'crammd5':
-				$filename  = 'Auth/SASL/CramMD5.php';
-				$classname = 'Auth_SASL_CramMD5';
-				break;
+            case 'crammd5':
+                $filename  = 'Auth/SASL/CramMD5.php';
+                $classname = 'Auth_SASL_CramMD5';
+                break;
 
-			case 'digestmd5':
-				$filename  = 'Auth/SASL/DigestMD5.php';
-				$classname = 'Auth_SASL_DigestMD5';
-				break;
+            case 'digestmd5':
+                $filename  = 'Auth/SASL/DigestMD5.php';
+                $classname = 'Auth_SASL_DigestMD5';
+                break;
 
-			default:
-				return PEAR::raiseError('Invalid SASL mechanism type');
-				break;
-		}
+            default:
+                return PEAR::raiseError('Invalid SASL mechanism type');
+                break;
+        }
 
-		require_once($filename);
-		return new $classname();
-	}
+        require_once($filename);
+        return new $classname();
+    }
 }
 
 ?>

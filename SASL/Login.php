@@ -50,12 +50,16 @@ require_once('Auth/SASL/Common.php');
 
 class Auth_SASL_Login extends Auth_SASL_Common
 {
-	/**
-    * 
+    /**
+    * Pseudo SASL LOGIN mechanism
+    *
+    * @param  string $user Username
+    * @param  string $pass Password
+    * @return string       LOGIN string
     */
-	function getResponse($user, $pass)
-	{
-		return sprintf('LOGIN %s %s', $user, $pass);
-	}
+    function getResponse($user, $pass)
+    {
+        return sprintf('LOGIN %s %s', $user, $pass);
+    }
 }
 ?>
