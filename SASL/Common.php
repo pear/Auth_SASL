@@ -62,8 +62,8 @@ class Auth_SASL_Common
             $key = str_pad($key, 64, chr(0));
         }
 
-        $k_ipad = (substr($key, 0, 64) ^ str_repeat(chr(0x36), 64));
-        $k_opad = (substr($key, 0, 64) ^ str_repeat(chr(0x5C), 64));
+        $k_ipad = substr($key, 0, 64) ^ str_repeat(chr(0x36), 64);
+        $k_opad = substr($key, 0, 64) ^ str_repeat(chr(0x5C), 64);
 
         $inner  = pack('H32', md5($k_ipad . $data));
         $digest = md5($k_opad . $inner);
