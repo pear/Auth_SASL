@@ -52,24 +52,29 @@ class Auth_SASL_DigestMD5 extends Auth_SASL_Common
     * requires a few extra parameters than the other
     * mechanisms, which are unavoidable.
     * 
-    * @param  string $user      Username
+    * @param  string $authcid   Authentication id (username)
     * @param  string $pass      Password
     * @param  string $challenge The digest challenge sent by the server
     * @param  string $hostname  The hostname of the machine you're connecting to
     * @param  string $service   The servicename (eg. imap, pop, acap etc)
+    * @param  string $authzid   Authorization id (username to proxy as)
     * @return string            The digest response (NOT base64 encoded)
     * @access public
     */
-    function getResponse($user, $pass, $challenge, $hostname, $service)
+    function getResponse($authcid, $pass, $challenge, $hostname, $service, $authzid = '')
     {
         $challenge = $this->_parseChallenge($challenge);
+        $authzid_string = '';
+        if ($authzid != '') {
+            $authzid_string = ',authzid="' . $authzid . '"'; 
+        }
 
         if (!empty($challenge)) {
             $cnonce         = $this->_getCnonce();
             $digest_uri     = sprintf('%s/%s', $service, $hostname);
-            $response_value = $this->_getResponseValue($user, $pass, $challenge['realm'], $challenge['nonce'], $cnonce, $digest_uri);
+            $response_value = $this->_getResponseValue($authcid, $pass, $challenge['realm'], $challenge['nonce'], $cnonce, $digest_uri, $authzid);
 
-            return sprintf('username="%s",realm="%s",nonce="%s",cnonce="%s",nc="00000001",qop=auth,digest-uri="%s",response=%s,%d', $user, $challenge['realm'], $challenge['nonce'], $cnonce, $digest_uri, $response_value, $challenge['maxbuf']);
+            return sprintf('username="%s",realm="%s"' . $authzid_string  . ',nonce="%s",cnonce="%s",nc="00000001",qop=auth,digest-uri="%s",response=%s,%d', $authcid, $challenge['realm'], $challenge['nonce'], $cnonce, $digest_uri, $response_value, $challenge['maxbuf']);
         } else {
             return PEAR::raiseError('Invalid digest challenge');
         }
@@ -140,18 +145,23 @@ class Auth_SASL_DigestMD5 extends Auth_SASL_Common
     /**
     * Creates the response= part of the digest response
     *
-    * @param  string $user       Username
+    * @param  string $authcid    Authentication id (username)
     * @param  string $pass       Password
     * @param  string $realm      Realm as provided by the server
     * @param  string $nonce      Nonce as provided by the server
     * @param  string $cnonce     Client nonce
     * @param  string $digest_uri The digest-uri= value part of the response
+    * @param  string $authzid    Authorization id
     * @return string             The response= part of the digest response
     * @access private
     */    
-    function _getResponseValue($user, $pass, $realm, $nonce, $cnonce, $digest_uri)
+    function _getResponseValue($authcid, $pass, $realm, $nonce, $cnonce, $digest_uri, $authzid = '')
     {
-        $A1 = sprintf('%s:%s:%s', pack('H32', md5(sprintf('%s:%s:%s', $user, $realm, $pass))), $nonce, $cnonce);
+        if ($authzid == '') {
+            $A1 = sprintf('%s:%s:%s', pack('H32', md5(sprintf('%s:%s:%s', $authcid, $realm, $pass))), $nonce, $cnonce);
+        } else {
+            $A1 = sprintf('%s:%s:%s:%s', pack('H32', md5(sprintf('%s:%s:%s', $authcid, $realm, $pass))), $nonce, $cnonce, $authzid);
+        }
         $A2 = 'AUTHENTICATE:' . $digest_uri;
         return md5(sprintf('%s:%s:00000001:%s:auth:%s', md5($A1), $nonce, $cnonce, md5($A2)));
     }

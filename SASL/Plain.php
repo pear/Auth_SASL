@@ -50,13 +50,14 @@ class Auth_SASL_Plain extends Auth_SASL_Common
     /**
     * Returns PLAIN response
     *
-    * @param  string $user Username
-    * @param  string $pass Password
-    * @return string       PLAIN Response
+    * @param  string $authcid   Authentication id (username)
+    * @param  string $pass      Password
+    * @param  string $authzid   Autorization id
+    * @return string            PLAIN Response
     */
-    function getResponse($user, $pass)
+    function getResponse($authcid, $pass, $authzid = '')
     {
-        return chr(0) . $user . chr(0) . $pass;
+        return $authzid . chr(0) . $authcid . chr(0) . $pass;
     }
 }
 ?>

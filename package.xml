@@ -21,29 +21,51 @@ o Login (Pseudo mechanism)
       <email>richard@php.net</email>
       <role>lead</role>
     </maintainer>
+
+    <maintainer>
+      <user>mbretter</user>
+      <name>Michael Bretterklieber</name>
+      <email>michael@bretterklieber.com</email>
+      <role>lead</role>
+    </maintainer>
   </maintainers>
 
   <release>
     <license>BSD</license>
-    <version>1.0.0</version>
-    <date>2002-05-26</date>
+    <version>1.0.1</version>
+    <date>2003-09-11</date>
     <state>stable</state>
     <notes>
-Initial release
+<![CDATA[
+* Added authcid/authzid separation in PLAIN and DIGEST-MD5.
+]]>
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="Auth">
-	  	<file role="php" name="SASL.php" />
-		<dir name="SASL">
-			<file role="php" name="Anonymous.php" />
-			<file role="php" name="Common.php" />
-			<file role="php" name="CramMD5.php" />
-			<file role="php" name="DigestMD5.php" />
-			<file role="php" name="Login.php" />
-			<file role="php" name="Plain.php" />
-		</dir>
+        <file role="php" name="SASL.php" />
+        <dir name="SASL">
+          <file role="php" name="Anonymous.php" />
+          <file role="php" name="Common.php" />
+          <file role="php" name="CramMD5.php" />
+          <file role="php" name="DigestMD5.php" />
+          <file role="php" name="Login.php" />
+          <file role="php" name="Plain.php" />
+        </dir>
       </dir>
     </filelist>
   </release>
+
+  <changelog>
+    <release>
+      <version>1.0.1</version>
+      <date>2003-09-11</date>
+      <state>stable</state>
+      <notes>
+<![CDATA[
+* Added authcid/authzid separation in PLAIN and DIGEST-MD5.
+]]>
+      </notes>
+    </release>
+  </changelog>
 
 </package>
