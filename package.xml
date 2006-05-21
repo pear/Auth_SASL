@@ -46,6 +46,7 @@ o Login (Pseudo mechanism)
  <notes>
 * Fixed Bug #2143 Auth_SASL_DigestMD5::getResponse() generates invalid response
 * Fixed Bug #6611 Suppress PHP 5 Notice Errors
+* Fixed Bug #2154 realm isn't contained in challange
  </notes>
  <contents>
   <dir name="/">
@@ -86,6 +87,7 @@ o Login (Pseudo mechanism)
 		 <notes>
 * Fixed Bug #2143 Auth_SASL_DigestMD5::getResponse() generates invalid response
 * Fixed Bug #6611 Suppress PHP 5 Notice Errors
+* Fixed Bug #2154 realm isn't contained in challange
 		 </notes>
 	 </release>
   <release>
