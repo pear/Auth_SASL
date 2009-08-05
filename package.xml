@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.6" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
-http://pear.php.net/dtd/tasks-1.0.xsd
-http://pear.php.net/dtd/package-2.0
-http://pear.php.net/dtd/package-2.0.xsd">
+<package version="2.0"
+ xmlns="http://pear.php.net/dtd/package-2.0"
+ xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+  http://pear.php.net/dtd/tasks-1.0.xsd
+  http://pear.php.net/dtd/package-2.0
+  http://pear.php.net/dtd/package-2.0.xsd"
+>
  <name>Auth_SASL</name>
  <channel>pear.php.net</channel>
  <summary>Abstraction of various SASL mechanism responses</summary>
- <description>Provides code to generate responses to common SASL mechanisms, including:
-o Digest-MD5
-o CramMD5
-o Plain
-o Anonymous
-o Login (Pseudo mechanism)
+ <description>
+Provides code to generate responses to common SASL mechanisms, including:
+- Digest-MD5
+- CramMD5
+- Plain
+- Anonymous
+- Login (Pseudo mechanism)
  </description>
+
  <lead>
-	 <name>Anish Mistry</name>
-	 <user>amistry</user>
-	 <email>amistry@am-productions.biz</email>
-	 <active>yes</active>
+  <name>Anish Mistry</name>
+  <user>amistry</user>
+  <email>amistry@am-productions.biz</email>
+  <active>no</active>
  </lead>
  <lead>
   <name>Richard Heyes</name>
@@ -31,8 +38,9 @@ o Login (Pseudo mechanism)
   <email>michael@bretterklieber.com</email>
   <active>no</active>
  </lead>
- <date>2006-10-18</date>
- <time>02:48:06</time>
+
+ <date>2009-08-05</date>
+
  <version>
   <release>1.0.3</release>
   <api>1.0.3</api>
@@ -41,70 +49,83 @@ o Login (Pseudo mechanism)
   <release>stable</release>
   <api>stable</api>
  </stability>
+
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
-* Fixed Bug #2143 Auth_SASL_DigestMD5::getResponse() generates invalid response
-* Fixed Bug #6611 Suppress PHP 5 Notice Errors
-* Fixed Bug #2154 realm isn't contained in challange
+QA release
+* Move SVN to proper directory structure [cweiske]
+* Fix Bug #8775: Error in package.xml
+* Fix Bug #14671: Security issue due to seeding random number generator [cweiske]
  </notes>
+
  <contents>
   <dir name="/">
-   <dir name="SASL">
-    <file baseinstalldir="Auth" name="Anonymous.php" role="php" />
-    <file baseinstalldir="Auth" name="Common.php" role="php" />
-    <file baseinstalldir="Auth" name="CramMD5.php" role="php" />
-    <file baseinstalldir="Auth" name="DigestMD5.php" role="php" />
-    <file baseinstalldir="Auth" name="Login.php" role="php" />
-    <file baseinstalldir="Auth" name="Plain.php" role="php" />
-    <file baseinstalldir="Auth" name="External.php" role="php" />
-   </dir> <!-- //SASL -->
-   <file baseinstalldir="Auth" name="SASL.php" role="php" />
+   <dir name="Auth">
+    <dir name="SASL">
+     <file name="Anonymous.php" role="php" />
+     <file name="Common.php" role="php" />
+     <file name="CramMD5.php" role="php" />
+     <file name="DigestMD5.php" role="php" />
+     <file name="Login.php" role="php" />
+     <file name="Plain.php" role="php" />
+     <file name="External.php" role="php" />
+    </dir> <!-- //SASL -->
+    <file name="SASL.php" role="php" />
+   </dir><!-- /Auth -->
   </dir> <!-- / -->
  </contents>
+
  <dependencies>
   <required>
    <php>
-    <min>4.0.0</min>
+    <min>4.2.0</min>
    </php>
    <pearinstaller>
     <min>1.4.3</min>
    </pearinstaller>
   </required>
  </dependencies>
+
  <phprelease />
+
  <changelog>
-     <release>
-         <version>
-             <release>1.0.3</release>
-             <api>1.0.3</api>
-         </version>
-         <stability>
-             <release>stable</release>
-             <api>stable</api>
-         </stability>
-         <date>2006-10-18</date>
-         <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
-         <notes>
-             * Fixed Bug #8775 Error in package.xml
-         </notes>
-	 </release>
-	 <release>
-		 <version>
-			 <release>1.0.2</release>
-			 <api>1.0.2</api>
-		 </version>
-		 <stability>
-			 <release>stable</release>
-			 <api>stable</api>
-		 </stability>
-		 <date>2006-05-21</date>
-		 <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
-		 <notes>
+  <release>
+   <version>
+    <release>1.0.3</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-08-05</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+QA release
+* Move SVN to proper directory structure [cweiske]
+* Fix Bug #8775: Error in package.xml
+* Fix Bug #14671: Security issue due to seeding random number generator [cweiske]
+   </notes>
+  </release>
+
+  <release>
+   <version>
+    <release>1.0.2</release>
+    <api>1.0.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-05-21</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
 * Fixed Bug #2143 Auth_SASL_DigestMD5::getResponse() generates invalid response
 * Fixed Bug #6611 Suppress PHP 5 Notice Errors
 * Fixed Bug #2154 realm isn't contained in challange
-		 </notes>
-	 </release>
+   </notes>
+  </release>
+
   <release>
    <version>
     <release>1.0.1</release>
@@ -120,4 +141,5 @@ o Login (Pseudo mechanism)
    </notes>
   </release>
  </changelog>
+
 </package>
