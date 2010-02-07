@@ -39,10 +39,10 @@ Provides code to generate responses to common SASL mechanisms, including:
   <active>no</active>
  </lead>
 
- <date>2009-08-05</date>
+ <date>2010-02-07</date>
 
  <version>
-  <release>1.0.3</release>
+  <release>1.0.4</release>
   <api>1.0.3</api>
  </version>
  <stability>
@@ -53,9 +53,7 @@ Provides code to generate responses to common SASL mechanisms, including:
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
 QA release
-* Move SVN to proper directory structure [cweiske]
-* Fix Bug #8775: Error in package.xml
-* Fix Bug #14671: Security issue due to seeding random number generator [cweiske]
+* Fix bug #16624: open_basedir restriction warning in DigestMD5.php [alec]
  </notes>
 
  <contents>
@@ -89,6 +87,23 @@ QA release
  <phprelease />
 
  <changelog>
+  <release>
+   <version>
+    <release>1.0.4</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-02-07</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+QA release
+* Fix bug #16624: open_basedir restriction warning in DigestMD5.php [alec]
+   </notes>
+  </release>
+
   <release>
    <version>
     <release>1.0.3</release>
