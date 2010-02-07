@@ -53,7 +53,7 @@ Provides code to generate responses to common SASL mechanisms, including:
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
 QA release
-* Fix bug #16624: open_basedir restriction warning in DigestMD5.php [alec]
+* Fix bug #16624: open_basedir restriction warning in DigestMD5.php [till]
  </notes>
 
  <contents>
@@ -100,7 +100,7 @@ QA release
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
 QA release
-* Fix bug #16624: open_basedir restriction warning in DigestMD5.php [alec]
+* Fix bug #16624: open_basedir restriction warning in DigestMD5.php [till]
    </notes>
   </release>
 
