@@ -14,10 +14,11 @@
  <description>
 Provides code to generate responses to common SASL mechanisms, including:
 - Digest-MD5
-- CramMD5
+- Cram-MD5
 - Plain
 - Anonymous
 - Login (Pseudo mechanism)
+- SCRAM
  </description>
 
  <lead>
@@ -39,10 +40,10 @@ Provides code to generate responses to common SASL mechanisms, including:
   <active>no</active>
  </lead>
 
- <date>2010-02-07</date>
+ <date>2011-09-04</date>
 
  <version>
-  <release>1.0.4</release>
+  <release>1.0.5</release>
   <api>1.0.3</api>
  </version>
  <stability>
@@ -53,7 +54,8 @@ Provides code to generate responses to common SASL mechanisms, including:
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
 QA release
-* Fix bug #16624: open_basedir restriction warning in DigestMD5.php [till]
+* Added basic support for any mechanism of the SCRAM family; with thanks to Jehan Pagès. [kguest]
+* crammd5 and digestmd5 mechanisms name deprecated in favour of IANA registered names 'cram-md5' and 'digest-md5'; with thanks to Jehan Pagès. [kguest]
  </notes>
 
  <contents>
@@ -64,9 +66,10 @@ QA release
      <file name="Common.php" role="php" />
      <file name="CramMD5.php" role="php" />
      <file name="DigestMD5.php" role="php" />
+     <file name="External.php" role="php" />
      <file name="Login.php" role="php" />
      <file name="Plain.php" role="php" />
-     <file name="External.php" role="php" />
+     <file name="SCRAM.php" role="php" />
     </dir> <!-- //SASL -->
     <file name="SASL.php" role="php" />
    </dir><!-- /Auth -->
@@ -87,6 +90,23 @@ QA release
  <phprelease />
 
  <changelog>
+  <release>
+   <version>
+    <release>1.0.5</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2011-09-04</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+QA release
+* Added support for any mechanism of the SCRAM family; with thanks to Jehan Pagès. [kguest]
+* crammd5 and digestmd5 mechanisms name deprecated in favour of IANA registered names 'cram-md5' and 'digest-md5'; with thanks to Jehan Pagès. [kguest]
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.0.4</release>
