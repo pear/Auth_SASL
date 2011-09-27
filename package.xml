@@ -40,10 +40,10 @@ Provides code to generate responses to common SASL mechanisms, including:
   <active>no</active>
  </lead>
 
- <date>2011-09-04</date>
+ <date>2011-09-27</date>
 
  <version>
-  <release>1.0.5</release>
+  <release>1.0.6</release>
   <api>1.0.3</api>
  </version>
  <stability>
@@ -54,8 +54,7 @@ Provides code to generate responses to common SASL mechanisms, including:
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
 QA release
-* Added basic support for any mechanism of the SCRAM family; with thanks to Jehan Pagès. [kguest]
-* crammd5 and digestmd5 mechanisms name deprecated in favour of IANA registered names 'cram-md5' and 'digest-md5'; with thanks to Jehan Pagès. [kguest]
+* Bug #18856: Authentication warnings because of wrong Auth_SASL::factory argument [kguest]
  </notes>
 
  <contents>
@@ -90,6 +89,22 @@ QA release
  <phprelease />
 
  <changelog>
+  <release>
+   <version>
+    <release>1.0.6</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2011-09-27</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+QA release
+* Bug #18856: Authentication warnings because of wrong Auth_SASL::factory argument [kguest]
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.0.5</release>
