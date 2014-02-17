@@ -18,7 +18,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Auth_SASL": "./"
+            "Auth": "./"
         }
     },
     "description": "Abstraction of various SASL mechanism responses",
