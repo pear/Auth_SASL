@@ -40,21 +40,21 @@ Provides code to generate responses to common SASL mechanisms, including:
   <active>no</active>
  </lead>
 
- <date>2011-09-27</date>
-
+ <date>2017-03-07</date>
  <version>
-  <release>1.0.6</release>
-  <api>1.0.3</api>
+  <release>1.1.0</release>
+  <api>1.1.0</api>
  </version>
  <stability>
   <release>stable</release>
   <api>stable</api>
  </stability>
-
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
-QA release
-* Bug #18856: Authentication warnings because of wrong Auth_SASL::factory argument [kguest]
+* Set minimum PHP version to 5.4.0
+* Set minimum PEAR version to 1.10.1
+
+* Request #21033: PHP warning depreciated
  </notes>
 
  <contents>
@@ -78,10 +78,10 @@ QA release
  <dependencies>
   <required>
    <php>
-    <min>4.2.0</min>
+    <min>5.4.0</min>
    </php>
    <pearinstaller>
-    <min>1.4.3</min>
+    <min>1.10.1</min>
    </pearinstaller>
   </required>
  </dependencies>
@@ -89,6 +89,26 @@ QA release
  <phprelease />
 
  <changelog>
+
+  <release>
+   <version>
+    <release>1.1.0</release>
+    <api>1.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2017-03-07</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+* Set minimum PHP version to 5.4.0
+* Set minimum PEAR version to 1.10.1
+
+* Request #21033: PHP warning depreciated
+   </notes>
+  </release>
+
   <release>
    <version>
     <release>1.0.6</release>
@@ -105,6 +125,7 @@ QA release
 * Bug #18856: Authentication warnings because of wrong Auth_SASL::factory argument [kguest]
    </notes>
   </release>
+
   <release>
    <version>
     <release>1.0.5</release>
@@ -122,6 +143,7 @@ QA release
 * crammd5 and digestmd5 mechanisms name deprecated in favour of IANA registered names 'cram-md5' and 'digest-md5'; with thanks to Jehan Pagès. [kguest]
    </notes>
   </release>
+
   <release>
    <version>
     <release>1.0.4</release>
@@ -190,6 +212,6 @@ QA release
    <notes>* Added authcid/authzid separation in PLAIN and DIGEST-MD5.
    </notes>
   </release>
- </changelog>
 
+ </changelog>
 </package>
