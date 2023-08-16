@@ -115,9 +115,17 @@ class Auth_SASL
 
         require_once($filename);
         if (isset($parameter))
-            $obj = new $classname($parameter);
-        else
+        {
             $obj = new $classname();
+            $check = $obj->factory($parameter);
+            if (PEAR::isError($check)) {
+                return $check;
+            }
+        }
+        else
+        {
+            $obj = new $classname();
+        }
         return $obj;
     }
 }
