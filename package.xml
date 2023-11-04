@@ -40,6 +40,12 @@ Provides code to generate responses to common SASL mechanisms, including:
   <email>michael@bretterklieber.com</email>
   <active>no</active>
  </lead>
+ <lead>
+  <name>Armin Graefe</name>
+  <user>schengawegga</user>
+  <email>schengawegga@gmail.com</email>
+  <active>yes</active>
+ </lead>
 
  <date>2017-03-07</date>
  <version>
