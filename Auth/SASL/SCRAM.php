@@ -68,18 +68,7 @@ class Auth_SASL_SCRAM extends Auth_SASL_Common
     * format of core PHP hash function.
     * @access public
     */
-    function __construct()
-    {
-    }
-
-    /**
-     * Construct a SCRAM-H client where 'H' is a cryptographic hash function.
-     *
-     * @param string $hash The name cryptographic hash function 'H' as registered by IANA in the "Hash Function Textual
-     * Names" registry.
-     * @return boolean|object true or PEAR::isError object
-     */
-    public function factory($hash)
+    function __construct($hash)
     {
         // Though I could be strict, I will actually also accept the naming used in the PHP core hash framework.
         // For instance "sha1" is accepted, while the registered hash name should be "SHA-1".
@@ -120,8 +109,7 @@ class Auth_SASL_SCRAM extends Auth_SASL_Common
             };
             $this->hmac = array($this, '_HMAC_SHA1');
         }
-        else
-        {
+        else {
             return PEAR::raiseError('Invalid SASL mechanism type');
         }
 
