@@ -13,11 +13,12 @@
  <summary>Abstraction of various SASL mechanism responses</summary>
  <description>
 Provides code to generate responses to common SASL mechanisms, including:
-- Digest-MD5
-- Cram-MD5
-- Plain
 - Anonymous
-- Login (Pseudo mechanism)
+- Cram-MD5 (DEPRECATED)
+- Digest-MD5 (DEPRECATED)
+- External
+- Login (Pseudo mechanism) (DEPRECATED)
+- Plain
 - SCRAM
  </description>
 
@@ -38,6 +39,12 @@ Provides code to generate responses to common SASL mechanisms, including:
   <user>mbretter</user>
   <email>michael@bretterklieber.com</email>
   <active>no</active>
+ </lead>
+ <lead>
+  <name>Armin Graefe</name>
+  <user>schengawegga</user>
+  <email>schengawegga@gmail.com</email>
+  <active>yes</active>
  </lead>
 
  <date>2017-03-07</date>
